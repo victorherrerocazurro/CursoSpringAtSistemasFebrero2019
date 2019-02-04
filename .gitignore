@@ -1,0 +1,19 @@
+# Eclipse Workspace
+.metadata/
+.recommenders/
+Servers/
+RemoteSystemsTempFiles/
+
+# Eclipse Project
+.settings/
+.project
+.classpath
+
+# STS
+.springBeans
+
+# Maven
+target/
+
+# Software
+software/
