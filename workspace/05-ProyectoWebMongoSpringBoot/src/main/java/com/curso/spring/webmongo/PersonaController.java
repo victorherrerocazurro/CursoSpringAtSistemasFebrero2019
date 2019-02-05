@@ -1,17 +1,14 @@
-package com.curso.spring.webjpa;
+package com.curso.spring.webmongo;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
-
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PersonaController {
 
 	@Autowired
-	private PersonaJpaRepository personaRepository;
+	private PersonaMongoRepository personaRepository;
 	
 	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> insertar(@RequestBody PersonaDto persona) throws URISyntaxException {
@@ -54,8 +51,7 @@ public class PersonaController {
 	
 	@GetMapping("/{identificador}")
 	public PersonaDto consultar(@PathVariable("identificador") long id){
-		//return personaRepository.getOne(id);
-		 return personaRepository.findById(id).get();
+		return personaRepository.findById(id).get();
 	}
 	
 }

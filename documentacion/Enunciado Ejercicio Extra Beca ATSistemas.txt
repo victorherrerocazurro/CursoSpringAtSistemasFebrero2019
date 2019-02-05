@@ -1,0 +1,69 @@
+Enunciado ejercicio Concesionario
+---------------------------------
+Aplicacion de concesionario de coches, con arquitectura de microservicios, compuesta por 5 aplicaciones:
+
+* Front Spring MVC.
+* APIs REST pedidos, comerciales, clientes y vehiculos.
+
+La aplicacion tendra acceso restringido por HTTPS.
+
+El acceso a las funcionalidades se hara desde un menu de una pagina principal, a donde se llegara previo login, dejando ver unicamente los accesos a las funcionalides a las que el usuario puede acceder segun su perfil.
+
+La aplicacion debe permitir
+
+- CRUD comerciales (Perfil Gerente).
+- CRUD clientes (Perfil Comercial).
+- CRUD vehiculos (Perfil Administrativo).
+
+- Gestion de pedidos (Perfil Comercial).
+-- Lanzar un nuevo pedido.
+-- Seguimiento del pedido de un cliente (comprobacion de estado).
+-- Recepcion de pedido y generacion de factura.
+
+- Gestion de facturas (Perfil Administrativo).
+-- Cobro de facturas y entrega de pedido.
+
+**** CRUD = Alta, Baja, Modificacion, ConsultaPorId y ConsultarTodos.
+
+---------------
+Modelo de datos
+---------------
+
+Cliente
+- id
+- nombre
+- telefono
+- correo
+- pedidos
+
+Vehiculo
+- id
+- descripcion
+- modelo
+- color
+- motor
+- precio
+
+Pedido
+- id
+- cliente
+- comercial
+- vehiculo
+- fecha
+- estado (en proceso, entregado, sin stock)
+- factura
+
+Factura
+- id
+- fecha
+- total
+- pedido
+- estado (cobrada, no cobrada, cobro fallido)
+
+Comercial
+- id
+- nombre
+- correo
+- telefono
+- clientes
+- pedidos

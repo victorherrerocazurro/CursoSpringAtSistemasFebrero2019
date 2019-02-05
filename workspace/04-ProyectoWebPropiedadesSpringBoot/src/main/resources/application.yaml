@@ -1,0 +1,15 @@
+spring:
+  boot:
+    propiedades:
+      nombre: Victor
+      puerto: 80
+
+message: Hola mundo!
+
+---
+spring:
+  profiles: production
+  boot:
+    propiedades:
+      nombre: Victor
+      puerto: 80

@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @JsonIgnoreProperties("hibernateLazyInitializer")
-public class Persona {
+public class PersonaDto {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
