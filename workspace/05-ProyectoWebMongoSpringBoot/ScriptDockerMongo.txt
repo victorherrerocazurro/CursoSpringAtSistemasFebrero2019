@@ -1,1 +1,1 @@
-c:>docker run -d --rm -p 27017:27017 mongo:4
+c:>docker run --name mongo -d --rm -p 27017:27017 mongo:4

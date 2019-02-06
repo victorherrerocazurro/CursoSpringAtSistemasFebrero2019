@@ -1,0 +1,1 @@
+c:>docker run --name=activemq -d --rm -e 'ACTIVEMQ_CONFIG_DEFAULTACCOUNT=true' -e 'ACTIVEMQ_CONFIG_TOPICS_topic1=mailbox' -p 8161:8161 -p 61616:61616 -p 61613:61613 webcenter/activemq:5.14.3
