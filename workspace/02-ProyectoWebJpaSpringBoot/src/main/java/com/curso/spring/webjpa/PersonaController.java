@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/Persona")
 public class PersonaController {
-
+	
 	@Autowired
 	private PersonaJpaRepository personaRepository;
 	

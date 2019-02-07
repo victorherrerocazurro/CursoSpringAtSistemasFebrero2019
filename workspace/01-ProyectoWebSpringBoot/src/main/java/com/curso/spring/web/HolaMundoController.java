@@ -14,6 +14,12 @@ import org.springframework.web.servlet.view.JstlView;
 @RequestMapping(path="/saludar")
 public class HolaMundoController {
 
+	@GetMapping("/")
+	public String index(Model model) {
+		return "welcome";
+		
+	}
+	
 	@GetMapping("/hola")
 	public View saludar(Model model) {
 		return new JstlView();
