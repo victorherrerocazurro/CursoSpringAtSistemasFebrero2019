@@ -2,6 +2,7 @@ package com.curso.spring.web;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -15,4 +16,8 @@ public class ConfiguracionesGenerales {
 		model.addAttribute("claveSesion", "valor");
 	}
 	
+	@ExceptionHandler(CustomException.class)
+	public String gestorExcepciones() {
+		return "index";
+	}
 }
