@@ -5,8 +5,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -17,78 +18,74 @@ import org.springframework.web.servlet.view.JstlView;
 //Definir un Bean
 @Controller
 //Permite definir un filtro de la request
-@RequestMapping(path="/saludar")
-@SessionAttributes({"claveSesion"})
+@RequestMapping(path = "/saludar")
+@SessionAttributes({ "claveSesion" })
 public class HolaMundoController {
+
+	@InitBinder
+	protected void initBinder(final WebDataBinder binder) {
+		binder.addValidators(null);
+	}
 
 	@ModelAttribute
 	public void initModel(Model model) {
 		model.addAttribute("clave", "valor");
 		model.addAttribute("claveSesion", "valor");
 	}
-	
+
 	@GetMapping("/")
 	public String index(Model model, HttpServletRequest req, HttpSession session) {
-		
+
 		model.addAttribute("clave", "valor");
 		req.setAttribute("clave", "valor");
-		
+
 		session.setAttribute("claveSesion", "valor");
 		model.addAttribute("claveSesion", "valor");
-		
+
 		return "welcome";
-		
+
 	}
-	
+
 	@GetMapping("/hola")
-	public View saludar(Model model, 
-			HttpServletRequest req, 
-			HttpSession session, 
-			@ModelAttribute("clave") String clave, 
+	public View saludar(Model model, HttpServletRequest req, HttpSession session, @ModelAttribute("clave") String clave,
 			@ModelAttribute("claveSesion") String claveSesion) {
-		
+
 		String clave1 = (String) req.getAttribute("clave");
 		String claveSesion1 = (String) session.getAttribute("claveSesion");
-		
-		
+
 		return new JstlView();
-		
+
 	}
-	
+
 	@GetMapping("/hola2")
 	public ModelAndView saludar(String nombre) {
 		return null;
-		
+
 	}
-	
-	//Desacopla de la vista
-	//Esta opcion precisa de un View Resolver
+
+	// Desacopla de la vista
+	// Esta opcion precisa de un View Resolver
 	@GetMapping("/hola3")
 	public String despedir(Model model) {
 		model.addAttribute("name", "Victor");
 		return "index";
-		
+
 	}
-	
+
 	@GetMapping("/excepcion")
 	public String excepcion() {
-		
-		//Esto es equivalente al uso de ExceptionHandler,
-		//Pero sin reutilizar
-		/*try {
-			//servicio.hazAlgo();
-			throw new CustomException();
-			
-			//return "exito";
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "index";
-		}*/
-		
+
+		// Esto es equivalente al uso de ExceptionHandler,
+		// Pero sin reutilizar
+		/*
+		 * try { //servicio.hazAlgo(); throw new CustomException();
+		 * 
+		 * //return "exito";
+		 * 
+		 * } catch (Exception e) { e.printStackTrace(); return "index"; }
+		 */
+
 		throw new CustomException();
 	}
-	
-	
-	
+
 }
