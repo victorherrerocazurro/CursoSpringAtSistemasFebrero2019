@@ -3,8 +3,16 @@ package com.curso.spring.carrito;
 import java.util.HashMap;
 import java.util.Map;
 
-//@Component
-//@Scope("session")
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@Component
+//@JsonIgnoreProperties("proxiedInterfaces")
+//Se alamcena en el mapa de atributos de la session como *scopedTarget.carrito*
+@SessionScope
 public class Carrito {
 
 	//Habria que considerar, el tamaño del objeto producto, 

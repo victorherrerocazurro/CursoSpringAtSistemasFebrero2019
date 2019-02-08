@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-@ControllerAdvice(basePackages="com.curso.spring.carrito")
+//@ControllerAdvice(basePackages="com.curso.spring.carrito")
 @SessionAttributes({"carrito"})
 public class ConfiguracionGlobalControllers {
 
