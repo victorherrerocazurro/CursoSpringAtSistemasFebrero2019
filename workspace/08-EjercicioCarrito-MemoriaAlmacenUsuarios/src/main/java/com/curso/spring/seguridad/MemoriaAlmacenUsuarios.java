@@ -19,7 +19,10 @@ public class MemoriaAlmacenUsuarios implements AlmacenUsuarios {
 	}
 	
 	@Override
-	public Usuario consultaSiExisteConEsteLoginYPassword(String login, String password) {		
+	public Usuario consultaSiExisteConEsteLoginYPassword(String login, String password) {
+		
+		System.out.println("Almacen");
+		
 		return almacenUsuarios.get(login + ":" + password);
 	}
 

@@ -12,9 +12,19 @@ public class BasicAuthenticationExtractorLoginPassword implements ExtractorLogin
 	@Override
 	public String[] extraerDeRequest(HttpServletRequest request) {
 		
+		System.out.println("Extractor");
+		
 		String headerAuthorization = request.getHeader("Authorization");
 		
-		return Base64.getDecoder().decode(headerAuthorization.split(" ")[1]).toString().split(":");
+		String base64 = headerAuthorization.split(" ")[1];
+		
+		System.out.println(base64);
+		
+		String decodeBase64 = new String(Base64.getDecoder().decode(base64));
+		
+		System.out.println(decodeBase64);
+		
+		return decodeBase64.split(":");
 	}
 
 }

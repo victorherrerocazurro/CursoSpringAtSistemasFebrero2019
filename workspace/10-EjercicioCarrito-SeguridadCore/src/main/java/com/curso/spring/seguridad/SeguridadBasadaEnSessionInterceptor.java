@@ -21,6 +21,8 @@ public class SeguridadBasadaEnSessionInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 
+		System.out.println("En el interceptor");
+		
 		HttpSession session = request.getSession(true);
 		
 		//Si se cumple la existencia del dato que indica que hay un usuario logado (Principal) en la session
@@ -47,6 +49,9 @@ public class SeguridadBasadaEnSessionInterceptor implements HandlerInterceptor {
 	}
 
 	private Usuario verificarDatosAutenticacion(HttpServletRequest request) {
+		
+		System.out.println("Verificando usuario");
+		
 		String[] loginPassword = extractorLoginPassword.extraerDeRequest(request);
 		
 		return almacenUsuarios.consultaSiExisteConEsteLoginYPassword(loginPassword[0], loginPassword[1]);

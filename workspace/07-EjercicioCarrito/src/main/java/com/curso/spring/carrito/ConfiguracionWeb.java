@@ -18,7 +18,8 @@ public class ConfiguracionWeb implements WebMvcConfigurer{
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(seguridadInterceptor).addPathPatterns("**");
+		System.out.println("Registrnado interceptor");
+		registry.addInterceptor(seguridadInterceptor).addPathPatterns("/**");
 	}
 	
 	
