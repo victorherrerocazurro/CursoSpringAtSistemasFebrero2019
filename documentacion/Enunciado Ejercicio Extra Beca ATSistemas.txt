@@ -1,14 +1,15 @@
 Enunciado ejercicio Concesionario
 ---------------------------------
 
-Aplicacion de concesionario de coches, con arquitectura de microservicios, compuesta por 5 aplicaciones:
+Version 1:
+----------
 
-* Front Spring MVC.
-* APIs REST pedidos, comerciales, clientes y vehiculos.
+Aplicacion de concesionario de coches, con arquitectura monolitica, 1 aplicacion.
 
-La aplicacion tendra acceso restringido por HTTPS.
+La aplicacion tendra acceso restringido por HTTPS. (opcional)
 
-El acceso a las funcionalidades se hara desde un menu de una pagina principal, a donde se llegara previo login, dejando ver unicamente los accesos a las funcionalides a las que el usuario puede acceder segun su perfil.
+El acceso a las funcionalidades se hara desde un menu de una pagina principal, a donde se llegara previo login, 
+dejando ver unicamente los accesos a las funcionalides a las que el usuario puede acceder segun su perfil.
 
 La aplicacion debe permitir
 
@@ -68,3 +69,21 @@ Comercial
 - telefono
 - clientes
 - pedidos
+
+
+
+
+
+Version 2:
+----------
+
+Aplicar arquitectura de microservicios, compuesta por al menos 5 aplicaciones:
+
+* Front Spring MVC.
+* APIs REST pedidos, comerciales, clientes y vehiculos.
+
+
+Version 3:
+----------
+
+Aplicar CQRS en los crud, esto será tener los comando (Alta, baja, modificacion) bajo Mysql y las consultas bajo MongoDb, la comunicacion la hariamos con Bus AMQP.
