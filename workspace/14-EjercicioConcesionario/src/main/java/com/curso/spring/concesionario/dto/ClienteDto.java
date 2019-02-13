@@ -40,5 +40,8 @@ public class ClienteDto implements Serializable{
 		this.telefono = telefono;
 		this.correo = correo;
 	}
-	
+	public ClienteDto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 }

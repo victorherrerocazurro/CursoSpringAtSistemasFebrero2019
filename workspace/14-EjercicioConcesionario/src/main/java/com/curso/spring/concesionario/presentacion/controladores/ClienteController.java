@@ -22,12 +22,21 @@ public class ClienteController {
 	@Autowired
 	private ClienteService clienteService;
 	
+	@GetMapping("/nuevo")
+	public String altaFormulario(Model model) {
+		
+		model.addAttribute("cliente", new ClienteDto());
+		
+		return "cliente/formulario";
+	}
+	
 	@PostMapping("/nuevo")
 	public String alta(@ModelAttribute ClienteDto cliente, Model model) throws Exception {
 		
 		long idCliente = clienteService.alta(cliente);
 		
 		model.addAttribute("mensaje", "Se ha dado de alta correctamente un cliente con ID = " + idCliente);
+		model.addAttribute("cliente", cliente);
 		
 		return "cliente/formulario";
 	}
@@ -48,13 +57,23 @@ public class ClienteController {
 	}
 	
 	@PostMapping("/actualizar")
-	public String modificacion(@ModelAttribute ClienteDto cliente) {
-		return null;
+	public String modificacion(@ModelAttribute ClienteDto cliente, Model model) throws Exception {
+		
+		clienteService.modificacion(cliente);
+		
+		model.addAttribute("mensaje", "Se ha modificado correctamente un cliente con ID = " + cliente.getId());
+		
+		return "cliente/formulario";
 	}
 	
 	@GetMapping("/detalle")
-	public String consultaPorId(@RequestParam long id) {
-		return null;
+	public String consultaPorId(@RequestParam long id, Model model) throws Exception {
+		
+		ClienteDto clienteDto = clienteService.consultaPorId(id);
+		
+		model.addAttribute("cliente", clienteDto);
+		
+		return "cliente/formulario";
 	}
 	
 	@GetMapping("/listado")

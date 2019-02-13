@@ -10,14 +10,14 @@ public class ClienteTransformador implements Transformador<ClienteDto, Cliente> 
 
 	@Override
 	public Cliente dtoToEntidad(ClienteDto clienteDto) {
-		Cliente cliente = new Cliente(clienteDto.getId(), clienteDto.getNombre(), clienteDto.getTelefono(), clienteDto.getCorreo());
+		Cliente cliente = new Cliente(
+				clienteDto.getId(), clienteDto.getNombre(), clienteDto.getTelefono(), clienteDto.getCorreo());
 		return cliente;
 	}
 
 	@Override
-	public ClienteDto entidadToDto(Cliente vehiculo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ClienteDto entidadToDto(Cliente cliente) {
+		return new ClienteDto(cliente.getId(), cliente.getNombre(), cliente.getTelefono(), cliente.getCorreo());
 	}
 
 }

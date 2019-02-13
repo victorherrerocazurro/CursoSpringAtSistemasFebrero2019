@@ -1,6 +1,7 @@
 package com.curso.spring.concesionario.core.servicios;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -23,7 +24,6 @@ public class ClienteServiceImpl implements ClienteService {
 	
 	@Override
 	public long alta(ClienteDto clienteDto) throws Exception {
-		
 		Cliente cliente = transformador.dtoToEntidad(clienteDto);
 		
 		Cliente clienteGuardado = clienteRepository.save(cliente);
@@ -33,26 +33,25 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public void baja(long id) throws Exception {
-		// TODO Auto-generated method stub
-
+		clienteRepository.deleteById(id);
 	}
 
 	@Override
 	public void modificacion(ClienteDto cliente) throws Exception {
-		// TODO Auto-generated method stub
-
+		alta(cliente);
 	}
 
 	@Override
-	public ClienteDto consultaPorId(long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public ClienteDto consultaPorId(long id) throws Exception {	
+		Cliente cliente = clienteRepository.getOne(id);
+	
+		return transformador.entidadToDto(cliente);
 	}
 
 	@Override
 	public Collection<ClienteDto> consultarTodos() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return clienteRepository.findAll().parallelStream()
+				.map(c -> transformador.entidadToDto(c)).collect(Collectors.toList());
 	}
 
 }

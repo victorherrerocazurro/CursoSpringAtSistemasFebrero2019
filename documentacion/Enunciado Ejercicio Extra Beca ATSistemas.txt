@@ -18,14 +18,24 @@ La aplicacion debe permitir
 - CRUD vehiculos (Perfil Administrativo).
 
 - Gestion de pedidos (Perfil Comercial).
--- Lanzar un nuevo pedido.
--- Seguimiento del pedido de un cliente (comprobacion de estado).
--- Recepcion de pedido y generacion de factura.
+-- Lanzar un nuevo pedido. conocidos el cliente, el comercial y el vehiculo a pedir, 
+	se cosulta el stock, si hay stock se registra en la BBDD un nuevo Pedido con estado en proceso
+	si no hay stock, se registra en la BBDD un nuevo Pedido con estado en sin stock y se envia un evento 
+	al bus que escuchará la fabrica para producir el vehiculo.
+
+-- Seguimiento del pedido de un cliente (comprobacion de estado). Consulta por Identificador del Pedido, que como proyeccion nos de el estado.
+
+
+- Gestion de pedidos (Perfil stock)
+-- Recepcion de pedido cambiando su estado a "listo para entregar" y creacion de entidad factura con estado no cobrada. (Envio de correo al cliente o al comercial)
 
 - Gestion de facturas (Perfil Administrativo).
--- Cobro de facturas y entrega de pedido.
+-- Cobro del pedido, generacion impresa de la factura y entrega de pedido. Cambio de estados de las entidades.
 
 **** CRUD = Alta, Baja, Modificacion, ConsultaPorId y ConsultarTodos.
+
+ClienteDto y ComercialDto, tienen todos los campos en comun, luego lo normal seria crear una clase superior que abosorbiese esos campos 
+comunes y que ClienteDto y ComercialDto extendiesen esa clase
 
 ---------------
 Modelo de datos
@@ -52,7 +62,7 @@ Pedido
 - comercial
 - vehiculo
 - fecha
-- estado (en proceso, entregado, sin stock)
+- estado (en proceso, entregado, sin stock, listo para entregar)
 - factura
 
 Factura
@@ -60,7 +70,7 @@ Factura
 - fecha
 - total
 - pedido
-- estado (cobrada, no cobrada, cobro fallido)
+- estado (pendiente de cobro, cobrada)
 
 Comercial
 - id
