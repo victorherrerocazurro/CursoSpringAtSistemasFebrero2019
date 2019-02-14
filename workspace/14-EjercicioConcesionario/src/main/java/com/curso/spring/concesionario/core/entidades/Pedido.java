@@ -1,6 +1,5 @@
 package com.curso.spring.concesionario.core.entidades;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -20,7 +19,7 @@ public class Pedido {
 	private long idCliente;
 	private long idComercial;
 	private long idVehiculo;
-	private long idFactura;
+	private Long idFactura;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha;
 	private Estado estado;
@@ -79,7 +78,8 @@ public class Pedido {
 	}
 	public Pedido() {
 		super();
-		// TODO Auto-generated constructor stub
+		this.setFecha(new Date());
+		this.setEstado(Estado.EN_PROCESO);
 	}
 	
 	

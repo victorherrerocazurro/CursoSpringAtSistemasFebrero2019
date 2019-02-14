@@ -1,6 +1,7 @@
 package com.curso.spring.concesionario.core.servicios;
 
 import com.curso.spring.concesionario.dto.EntregaPedidoDto;
+import com.curso.spring.concesionario.dto.FacturaDto;
 import com.curso.spring.concesionario.dto.PedidoDto;
 
 public interface PedidoService {
@@ -11,6 +12,6 @@ public interface PedidoService {
 	
 	void recepcionPedido(long idPedido) throws Exception;
 	
-	PedidoDto entregaPedido(EntregaPedidoDto entregaPedido) throws Exception;
+	FacturaDto entregaPedido(EntregaPedidoDto entregaPedido) throws Exception;
 	
 }
