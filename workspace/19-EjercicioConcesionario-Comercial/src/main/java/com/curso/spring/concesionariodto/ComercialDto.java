@@ -1,4 +1,4 @@
-package com.curso.spring.concesionario.dto;
+package com.curso.spring.concesionariodto;
 
 import java.util.Collection;
 

@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.curso.spring.concesionario.core.entidades.Factura;
 
-public interface FacturaRepository extends JpaRepository<Factura, Long> {
+public interface FacturaJpaRepository extends JpaRepository<Factura, Long> {
 
 }

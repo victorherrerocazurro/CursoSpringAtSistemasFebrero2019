@@ -1,8 +1,17 @@
-package com.curso.spring.concesionario.dto;
+package com.curso.spring.concesionario.core.entidades;
 
 import java.util.Collection;
 
-public class ComercialDto {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Comercial {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String nombre;
 	private String telefono;
@@ -45,7 +54,7 @@ public class ComercialDto {
 	public void setPedidos(Collection<Long> pedidos) {
 		this.pedidos = pedidos;
 	}
-	public ComercialDto(Long id, String nombre, String telefono, String correo, Collection<Long> clientes,
+	public Comercial(Long id, String nombre, String telefono, String correo, Collection<Long> clientes,
 			Collection<Long> pedidos) {
 		super();
 		this.id = id;
@@ -55,7 +64,7 @@ public class ComercialDto {
 		this.clientes = clientes;
 		this.pedidos = pedidos;
 	}
-	public ComercialDto() {
+	public Comercial() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

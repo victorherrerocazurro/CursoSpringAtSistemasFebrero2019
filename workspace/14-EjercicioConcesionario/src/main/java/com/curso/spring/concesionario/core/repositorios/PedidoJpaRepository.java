@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.curso.spring.concesionario.core.entidades.Pedido;
 
-public interface PedidoRepository extends JpaRepository<Pedido, Long> {
+public interface PedidoJpaRepository extends JpaRepository<Pedido, Long> {
 
 }

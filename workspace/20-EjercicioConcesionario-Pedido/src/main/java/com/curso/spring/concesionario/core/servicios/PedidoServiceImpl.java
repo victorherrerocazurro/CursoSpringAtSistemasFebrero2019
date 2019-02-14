@@ -7,27 +7,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.curso.spring.concesionario.core.Estado;
+import com.curso.spring.concesionario.Estado;
 import com.curso.spring.concesionario.core.entidades.Factura;
 import com.curso.spring.concesionario.core.entidades.Pedido;
-import com.curso.spring.concesionario.core.entidades.Vehiculo;
 import com.curso.spring.concesionario.core.negocio.FacturaTransformador;
 import com.curso.spring.concesionario.core.negocio.PedidoTransformador;
-import com.curso.spring.concesionario.core.repositorios.FacturaJpaRepository;
-import com.curso.spring.concesionario.core.repositorios.PedidoJpaRepository;
-import com.curso.spring.concesionario.core.repositorios.StockJpaRepository;
-import com.curso.spring.concesionario.core.repositorios.VehiculoJpaRepository;
+import com.curso.spring.concesionario.core.persistencia.FacturaJpaRepository;
+import com.curso.spring.concesionario.core.persistencia.PedidoJpaRepository;
+import com.curso.spring.concesionario.core.servicios.http.CobrosService;
+import com.curso.spring.concesionario.core.servicios.http.StockService;
+import com.curso.spring.concesionario.core.servicios.http.VehiculoService;
 import com.curso.spring.concesionario.dto.CobroDto;
 import com.curso.spring.concesionario.dto.EntregaPedidoDto;
 import com.curso.spring.concesionario.dto.FacturaDto;
 import com.curso.spring.concesionario.dto.PedidoDto;
+import com.curso.spring.concesionario.dto.VehiculoDto;
 
 @Service
 @Transactional
 public class PedidoServiceImpl implements PedidoService {
 
 	@Autowired
-	private StockJpaRepository stockRepository;
+	private StockService stockService;
 	@Autowired
 	private PedidoTransformador pedidoTransformador;
 	@Autowired
@@ -35,13 +36,13 @@ public class PedidoServiceImpl implements PedidoService {
 	@Autowired
 	private PedidoJpaRepository pedidoRepository;
 	@Autowired
-	private VehiculoJpaRepository vehiculoRepository;
+	private VehiculoService vehiculoService;
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 	@Autowired
 	private FacturaJpaRepository facturaRepository;
 	@Autowired
-	private ServicioCobros servicioCobros;
+	private CobrosService cobrosService;
 
 	/**
 	 * Lanzar un nuevo pedido. conocidos el cliente, el comercial y el vehiculo a
@@ -57,7 +58,7 @@ public class PedidoServiceImpl implements PedidoService {
 		Pedido pedido = pedidoTransformador.dtoToEntidad(pedidoDto);
 
 		// Consultar Stock
-		if (!stockRepository.hayStock(pedidoDto.getIdVehiculo(), 1)) {
+		if (!stockService.hayStock(pedidoDto.getIdVehiculo(), 1)) {
 			// si no hay stock, se cambia el estado del nuevo Pedido a sin stock
 			pedido.setEstado(Estado.SIN_STOCK);
 			// se envia un evento al bus que escuchará la fabrica para producir el vehiculo.
@@ -87,7 +88,7 @@ public class PedidoServiceImpl implements PedidoService {
 		Pedido pedido = pedidoRepository.getOne(idPedido);
 
 		// Creamos la factura, para lo cual necesitamos recuperar el precio del vehiculo
-		Vehiculo vehiculo = vehiculoRepository.getOne(pedido.getIdVehiculo());
+		VehiculoDto vehiculo = vehiculoService.consultarPorId(pedido.getIdVehiculo());
 
 		Factura factura = new Factura(null, new Date(), vehiculo.getPrecio(), idPedido, "PENDIENTE_DE_COBRO");
 
@@ -117,7 +118,7 @@ public class PedidoServiceImpl implements PedidoService {
 		Factura factura = facturaRepository.getOne(pedido.getIdFactura());
 
 		// Cobrar el pedido
-		servicioCobros.cobrarCorTarjeta(new CobroDto(entregaPedido.getNumeroTarjeta(), factura.getTotal()));
+		cobrosService.cobrarCorTarjeta(new CobroDto(entregaPedido.getNumeroTarjeta(), factura.getTotal()));
 
 		// Cambio de estado a la factura
 		factura.setEstado("COBRADA");
