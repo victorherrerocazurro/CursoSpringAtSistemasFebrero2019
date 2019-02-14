@@ -26,15 +26,21 @@ import com.curso.spring.concesionario.dto.PedidoDto;
 @Transactional
 public class PedidoServiceImpl implements PedidoService {
 
+	@Autowired
 	private StockRepository stockRepository;
+	@Autowired
 	private PedidoTransformador pedidoTransformador;
+	@Autowired
 	private FacturaTransformador facturaTransformador;
+	@Autowired
 	private PedidoRepository pedidoRepository;
+	@Autowired
 	private VehiculoRepository vehiculoRepository;
-
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
+	@Autowired
 	private FacturaRepository facturaRepository;
+	@Autowired
 	private ServicioCobros servicioCobros;
 
 	/**
@@ -126,6 +132,9 @@ public class PedidoServiceImpl implements PedidoService {
 		pedidoRepository.save(pedido);
 
 		FacturaDto facturaDto = facturaTransformador.entidadToDto(factura);
+		
+		facturaDto.setPedido(pedidoTransformador.entidadToDto(pedido));
+		
 		return facturaDto;
 	}
 
