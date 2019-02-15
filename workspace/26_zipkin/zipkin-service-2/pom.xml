@@ -13,7 +13,7 @@
 
 	  <parent>
 		<groupId>com.example.howtodoinjava</groupId>
-		 <artifactId>zipkin</artifactId>
+		 <artifactId>26_zipkin</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
   </parent>
 
