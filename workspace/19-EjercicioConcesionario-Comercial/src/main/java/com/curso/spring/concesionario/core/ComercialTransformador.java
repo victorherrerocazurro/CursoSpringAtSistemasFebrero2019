@@ -14,7 +14,7 @@ public class ComercialTransformador implements Transformador<ComercialDto, Comer
 
 	@Override
 	public ComercialDto entidadToDto(Comercial entidad) {
-		return new ComercialDto(entidad.getId(), entidad.getNombre(), entidad.getTelefono(), entidad.getCorreo(), entidad.getClientes(), entidad.getPedidos());
+		return new ComercialDto(entidad.getId(), entidad.getNombre(), entidad.getTelefono(), entidad.getCorreo(), null, null);
 	}
 
 }

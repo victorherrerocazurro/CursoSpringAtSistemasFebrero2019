@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient("microservicio-stock")
+import com.curso.spring.concesionario.ConfiguracionOauth;
+
+@FeignClient(name="microservicio-stock", configuration=ConfiguracionOauth.class)
 @RequestMapping("/stock")
 public interface StockService {
 

@@ -5,9 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.curso.spring.concesionario.ConfiguracionOauth;
 import com.curso.spring.concesionario.dto.VehiculoDto;
 
-@FeignClient("microservicio-vehiculo")
+@FeignClient(name="microservicio-vehiculo", configuration=ConfiguracionOauth.class)
 @RequestMapping("/vehiculo")
 public interface VehiculoService {
 

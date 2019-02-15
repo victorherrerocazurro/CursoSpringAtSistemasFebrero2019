@@ -106,6 +106,14 @@ public class ConfiguracionOauth extends AuthorizationServerConfigurerAdapter {
 				.redirectUris("http://localhost:8083/client/") //URL a la que se redirigirá al usuario una vez finalizada la autenticacion
 
 				.and()
+				
+				.withClient("pedidos") //Identificador de la aplicacion cliente en el servidor de autorizacion.
+				.secret("secret")
+				.authorizedGrantTypes("client_credentials", "authorization_code", "refresh_token")
+				.scopes("read", "write") //Scopes que la aplicacion cliente pedira a cada usuario que le concedan
+				.redirectUris("http://localhost/microservicio-pedidos/pedido") //URL a la que se redirigirá al usuario una vez finalizada la autenticacion
+				
+				.and()
 
 				// Aplicaciones cliente no validadas, que podran acceder en principio solo a contenido publico
 				.withClient("public") // No secret!

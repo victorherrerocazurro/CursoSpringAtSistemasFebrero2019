@@ -1,4 +1,4 @@
-package com.curso.spring.concesionario.core;
+package com.curso.spring.concesionario.http;
 
 import java.util.Collection;
 
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.curso.spring.concesionario.core.ClienteService;
 import com.curso.spring.concesionario.dto.ClienteDto;
 
 @RestController

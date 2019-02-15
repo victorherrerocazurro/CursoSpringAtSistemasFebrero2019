@@ -26,9 +26,8 @@ import com.curso.spring.concesionario.dto.VehiculoDto;
 @Service
 @Transactional
 public class PedidoServiceImpl implements PedidoService {
-
-	@Autowired
-	private StockService stockService;
+	
+	//Negocio interno
 	@Autowired
 	private PedidoTransformador pedidoTransformador;
 	@Autowired
@@ -36,13 +35,17 @@ public class PedidoServiceImpl implements PedidoService {
 	@Autowired
 	private PedidoJpaRepository pedidoRepository;
 	@Autowired
+	private FacturaJpaRepository facturaRepository;
+	
+	//Negocio Externo
+	@Autowired
+	private CobrosService cobrosService;
+	@Autowired
+	private StockService stockService;
+	@Autowired
 	private VehiculoService vehiculoService;
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
-	@Autowired
-	private FacturaJpaRepository facturaRepository;
-	@Autowired
-	private CobrosService cobrosService;
 
 	/**
 	 * Lanzar un nuevo pedido. conocidos el cliente, el comercial y el vehiculo a
@@ -58,12 +61,12 @@ public class PedidoServiceImpl implements PedidoService {
 		Pedido pedido = pedidoTransformador.dtoToEntidad(pedidoDto);
 
 		// Consultar Stock
-		if (!stockService.hayStock(pedidoDto.getIdVehiculo(), 1)) {
+		//if (!stockService.hayStock(pedidoDto.getIdVehiculo(), 1)) {
 			// si no hay stock, se cambia el estado del nuevo Pedido a sin stock
 			pedido.setEstado(Estado.SIN_STOCK);
 			// se envia un evento al bus que escuchará la fabrica para producir el vehiculo.
 			rabbitTemplate.convertAndSend("amqp.fabrica.vehiculos", "amqp.fabrica.vehiculos.pedido", pedido);
-		}
+		//}
 		// Tanto si hay stock, como sino, se registra en la BBDD un nuevo Pedido
 		pedidoRepository.save(pedido);
 	}

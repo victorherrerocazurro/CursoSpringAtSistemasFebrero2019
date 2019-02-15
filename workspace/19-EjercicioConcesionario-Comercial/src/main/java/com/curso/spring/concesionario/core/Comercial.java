@@ -16,8 +16,8 @@ public class Comercial {
 	private String nombre;
 	private String telefono;
 	private String correo;
-	private Collection<Long> clientes;
-	private Collection<Long> pedidos;
+	//private Collection<Long> clientes;
+	//private Collection<Long> pedidos;
 	public Long getId() {
 		return id;
 	}
@@ -42,7 +42,7 @@ public class Comercial {
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-	public Collection<Long> getClientes() {
+	/*public Collection<Long> getClientes() {
 		return clientes;
 	}
 	public void setClientes(Collection<Long> clientes) {
@@ -53,7 +53,7 @@ public class Comercial {
 	}
 	public void setPedidos(Collection<Long> pedidos) {
 		this.pedidos = pedidos;
-	}
+	}*/
 	public Comercial(Long id, String nombre, String telefono, String correo, Collection<Long> clientes,
 			Collection<Long> pedidos) {
 		super();
@@ -61,8 +61,8 @@ public class Comercial {
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.correo = correo;
-		this.clientes = clientes;
-		this.pedidos = pedidos;
+		//this.clientes = clientes;
+		//this.pedidos = pedidos;
 	}
 	public Comercial() {
 		super();
